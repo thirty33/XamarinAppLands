@@ -46,6 +46,14 @@
         }
         #endregion
 
+        #region Constructors
+        public LoginViewModel()
+        {
+            this.IsRemembered = true;
+            this.IsEnabled = true;
+        }
+        #endregion
+
         #region Commands
         public ICommand LoginCommand
         {
@@ -57,6 +65,52 @@
 
         private async void Login()
         {
+            
+            
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                   "Debes ingresar email",
+                   "aceptar");
+               return;
+            }
+
+
+
+            if (string.IsNullOrEmpty(this.Password))
+            {
+
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Debes ingresar password",
+                    "aceptar");
+                return;
+            }
+
+            this.IsRunning = true;
+            this.IsEnabled = false;
+
+            if (this.Email != "joel" || this.Password != "1234")
+            {
+
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Email o password incorrecto",
+                    "aceptar");
+                this.Password = string.Empty;
+                return;
+
+            }
+
+            this.IsRunning = false;
+            this.IsEnabled = true;
+            await Application.Current.MainPage.DisplayAlert(
+                    "bien",
+                    "Entraste",
+                    "aceptar");
 
         }
 
