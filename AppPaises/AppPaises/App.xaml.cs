@@ -10,7 +10,10 @@
 			InitializeComponent();
 
             //MainPage = new AppPaises.MainPage();
-            this.MainPage = new NavigationPage(new LoginPage());
+            //this.MainPage = new NavigationPage(new LoginPage());
+
+            // Probando inicializacion en PaisesPage
+            this.MainPage = new NavigationPage(new PaisesPage());
 		}
 
 		protected override void OnStart ()

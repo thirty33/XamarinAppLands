@@ -1,4 +1,6 @@
-﻿namespace AppPaises.ViewModels
+﻿using Android.App;
+
+namespace AppPaises.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
@@ -51,6 +53,9 @@
         {
             this.IsRemembered = true;
             this.IsEnabled = true;
+
+            this.Email = "joel";
+            this.Password = "1234";
         }
         #endregion
 
