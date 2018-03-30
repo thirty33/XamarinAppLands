@@ -107,10 +107,18 @@
 
             this.IsRunning = false;
             this.IsEnabled = true;
-            await Application.Current.MainPage.DisplayAlert(
-                    "bien",
-                    "Entraste",
-                    "aceptar");
+            //await Application.Current.MainPage.DisplayAlert(
+            //        "bien",
+            //        "Entraste",
+            //        "aceptar");
+
+            this.Email = string.Empty;
+            this.Password = string.Empty;
+
+
+            // Aplicando Patron Singleton
+            var mainViewModel = MainViewModel.GetInstance().Lands = new PaisesViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new PaisesPage());
 
         }
 
