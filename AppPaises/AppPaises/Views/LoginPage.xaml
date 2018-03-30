@@ -30,7 +30,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Keyboard="Email"
-                        Text="..."
+                        Text="{Binding Email, Mode=TwoWay}"
                         Placeholder="...">
                     </Entry>
                     <Label
@@ -43,13 +43,13 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         IsPassword="true"
-                        Text="Ingrese password"
+                        Text="{Binding Password, Mode=TwoWay}"
                         Placeholder="...">
                     </Entry>
 
                 </Grid>
                 <ActivityIndicator
-                    IsRunning="False"
+                    IsRunning="{Binding IsRunnig, Mode=TwoWay}"
                     VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
                 <StackLayout
@@ -62,7 +62,7 @@
                         VerticalOptions="Center">
                     </Label>
                     <Switch
-                        IsToggled="True"
+                        IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                         HorizontalOptions="End">
                     </Switch>
                 </StackLayout>
@@ -79,7 +79,7 @@
                     <Button
                         BackgroundColor="Navy"
                         BorderRadius="23"
-                        Command=""
+                        Command="{Binding loginCommand}"
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="True"
