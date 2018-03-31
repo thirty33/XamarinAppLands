@@ -12,17 +12,6 @@
                 ItemsSource="{Binding Lands}">
                 
             </ListView>
-            <Label
-                Text="{Binding Prueba, Mode=TwoWay}"
-                VerticalOptions="Center">
-            </Label>
-            <Entry
-              Grid.Row="0"
-              Grid.Column="1"
-              Keyboard="Email"
-              Text="{Binding Prueba, Mode=TwoWay}"
-              Placeholder="...">
-            </Entry>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
