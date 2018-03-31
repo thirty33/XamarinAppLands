@@ -70,15 +70,15 @@ namespace AppPaises.ViewModels
 
         private async void Login()
         {
-            
-            
+
+
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                    "Debes ingresar email",
                    "aceptar");
-               return;
+                return;
             }
 
 
@@ -100,22 +100,22 @@ namespace AppPaises.ViewModels
             {
 
                 this.IsRunning = false;
-                this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Email o password incorrecto",
-                    "aceptar");
-                this.Password = string.Empty;
-                return;
+            this.IsEnabled = true;
+            await Application.Current.MainPage.DisplayAlert(
+                "Error",
+                "Email o password incorrecto",
+                "aceptar");
+            this.Password = string.Empty;
+            return;
 
             }
 
             this.IsRunning = false;
             this.IsEnabled = true;
-            //await Application.Current.MainPage.DisplayAlert(
-            //        "bien",
-            //        "Entraste",
-            //        "aceptar");
+            await Application.Current.MainPage.DisplayAlert(
+                    "bien",
+                    "Entraste",
+                    "aceptar");
 
             this.Email = string.Empty;
             this.Password = string.Empty;
