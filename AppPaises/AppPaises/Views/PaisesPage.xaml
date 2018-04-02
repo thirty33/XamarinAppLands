@@ -16,7 +16,57 @@
                 ItemsSource="{Binding Lands}"
                 SeparatorVisibility="None"
                 RefreshCommand="{Binding RefreshCommand}">
-               
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                CornerRadius="20"
+                                HasShadow="True"
+                                Margin="5">
+                                <Frame.GestureRecognizers>
+                                    <!--Event tap recognizer-->
+                                    <TapGestureRecognizer
+                                        Command="{Binding SelectLandCommand}">
+                                        
+                                    </TapGestureRecognizer>
+                                    <!--layout structure-->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition
+                                                Width="auto">
+                                                
+                                            </ColumnDefinition>
+                                            <ColumnDefinition
+                                                Width="*">
+                                                
+                                            </ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout
+                                            Grid.Column="1"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding Name}"
+                                                TextColor="Black">
+                                                
+                                            </Label>
+                                            <Label
+                                                Text="{Binding Capital}"
+                                                TextColor="Black">
+                                                
+                                            </Label>   
+                                        </StackLayout>
+                                        <Image
+                                            Grid.Column="2"
+                                            HorizontalOptions="End"
+                                            Source="ic_chevron_right"></Image>
+                                    </Grid>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </ContentPage.Content>
