@@ -20,16 +20,27 @@
         private ObservableCollection<Land> lands;
         private bool isRefreshing;
         private string filter;
-        private string prueba;
+
+        //Lista de paises como atributo de clase
+        private List<Land> landsList;
         #endregion
 
         // ObservableCollection para usar en una ListView
         #region Properties
-
-        public string Prueba
+        public bool IsRefreshing
         {
-            get { return this.prueba; }
-            set { SetValue(ref this.prueba, value); }
+            get { return this.isRefreshing; }
+            set { SetValue(ref this.isRefreshing, value); }
+        }
+
+        public string  Filter
+        {
+            get { return this.filter; }
+            set
+            {
+                SetValue(ref this.filter, value);
+                this.Search();
+            }
         }
 
         public ObservableCollection<Land> Lands
@@ -39,23 +50,60 @@
         }
         #endregion
 
+        #region Commands
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadLands);
+            }
+        }
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                return new RelayCommand(Search);
+            }
+        }
+
+
+        #endregion
+
         #region Constructors
         public PaisesViewModel()
         {
-            this.Prueba = "Esta bindiando la data";
             this.apiService = new ApiService();
             this.LoadLands();
         }
         #endregion
 
         #region Methods
+        private void Search()
+        {
+            if (string.IsNullOrEmpty(this.Filter))
+            {
+                this.Lands = new ObservableCollection<Land>(this.landsList);
+            }
+            else
+            {
+                this.Lands = new ObservableCollection<Land>(
+                    this.landsList.Where(
+                       l => l.Name.ToLower().Contains(this.Filter.ToLower()) ||
+                             l.Capital.ToLower().Contains(this.Filter.ToLower())));
+            }
+
+        }
+
         private async void LoadLands()
         {
             // verificando conexion
+            this.IsRefreshing = true;
             var connection = await this.apiService.CheckConnection();
 
             if (!connection.IsSuccess)
             {
+                this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     connection.Message,
@@ -73,6 +121,7 @@
 
             if (!response.IsSuccess)
             {
+                this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     response.Message,
@@ -81,10 +130,13 @@
                 return;
             }
 
-            var list = (List<Land>)response.Result;
-            this.Lands = new ObservableCollection<Land>(list);
-            this.Prueba = "esta enlazando la data";
+            //var list = (List<Land>)response.Result;
+            this.landsList = (List<Land>)response.Result;
+            this.Lands = new ObservableCollection<Land>(this.landsList);
+            this.IsRefreshing = false;
+            
         }
+
         #endregion
     }
 }

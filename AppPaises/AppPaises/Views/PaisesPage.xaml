@@ -8,11 +8,21 @@
         <StackLayout
             BindingContext="{Binding Lands}"
             Padding="5">
+            <!--diferent Size in List View HasUnevenRows-->
+            <!--IsPullToRefreshEnabled, back and update-->
+            <!--Barra de Busqueda-->
+            <SearchBar
+                BackgroundColor="Silver"
+                HeightRequest="46"
+                Text="{Binding Filter, Mode=TwoWay}"
+                Placeholder="Search..."
+                SearchCommand="{Binding SearchCommand}">
+            </SearchBar>
             <ListView
                 BackgroundColor="Silver"
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
-                IsRefreshing="True"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding Lands}"
                 SeparatorVisibility="None"
                 RefreshCommand="{Binding RefreshCommand}">
@@ -33,11 +43,11 @@
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition
-                                                Width="auto">
-                                                
+                                                Width="*">
+
                                             </ColumnDefinition>
                                             <ColumnDefinition
-                                                Width="*">
+                                                Width="auto">
                                                 
                                             </ColumnDefinition>
                                         </Grid.ColumnDefinitions>
