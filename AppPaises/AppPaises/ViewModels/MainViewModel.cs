@@ -18,6 +18,8 @@
             get;
             set;
         }
+
+        public PaisViewModel Land { get; set; }
         #endregion
 
 
