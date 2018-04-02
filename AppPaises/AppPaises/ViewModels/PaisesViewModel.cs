@@ -60,7 +60,7 @@
                     "Error",
                     connection.Message,
                     "Accept");
-                //sacar del sack la navegacion
+                //sacar del stack la navegacion
                 await Application.Current.MainPage.Navigation.PopAsync();
 
                 return;

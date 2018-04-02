@@ -1,6 +1,4 @@
-﻿using Android.App;
-
-namespace AppPaises.ViewModels
+﻿namespace AppPaises.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;

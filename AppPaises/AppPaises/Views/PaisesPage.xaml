@@ -9,8 +9,14 @@
             BindingContext="{Binding Lands}"
             Padding="5">
             <ListView
-                ItemsSource="{Binding Lands}">
-                
+                BackgroundColor="Silver"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="True"
+                ItemsSource="{Binding Lands}"
+                SeparatorVisibility="None"
+                RefreshCommand="{Binding RefreshCommand}">
+               
             </ListView>
         </StackLayout>
     </ContentPage.Content>
