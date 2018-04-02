@@ -8,6 +8,7 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Xamarin.Forms;
+    using System;
 
     public class PaisesViewModel : BaseViewModel
     {
@@ -17,7 +18,8 @@
         #endregion
 
         #region Attributes
-        private ObservableCollection<Land> lands;
+        //private ObservableCollection<Land> lands;
+        private ObservableCollection<PaisItemViewModel> lands;
         private bool isRefreshing;
         private string filter;
 
@@ -43,7 +45,7 @@
             }
         }
 
-        public ObservableCollection<Land> Lands
+        public ObservableCollection<PaisItemViewModel> Lands
         {
             get { return this.lands; }
             set { SetValue(ref this.lands, value); }
@@ -83,12 +85,12 @@
         {
             if (string.IsNullOrEmpty(this.Filter))
             {
-                this.Lands = new ObservableCollection<Land>(this.landsList);
+                this.Lands = new ObservableCollection<PaisItemViewModel>(this.ToPaisItemViewModel());
             }
             else
             {
-                this.Lands = new ObservableCollection<Land>(
-                    this.landsList.Where(
+                this.Lands = new ObservableCollection<PaisItemViewModel>(
+                    this.ToPaisItemViewModel().Where(
                        l => l.Name.ToLower().Contains(this.Filter.ToLower()) ||
                              l.Capital.ToLower().Contains(this.Filter.ToLower())));
             }
@@ -131,10 +133,54 @@
             }
 
             //var list = (List<Land>)response.Result;
-            this.landsList = (List<Land>)response.Result;
-            this.Lands = new ObservableCollection<Land>(this.landsList);
+            MainViewModel.GetInstance().LandsList = (List<Land>)response.Result;
+            //this.landsList = (List<Land>)response.Result;
+            //this.Lands = new ObservableCollection<Land>(this.landsList);
+
+            //Cambio coleccion observable a PaisItemViewModel
+            //this.Lands = new ObservableCollection<PaisItemViewModel>(
+            //    this.ToPaisItemViewModel());
+
+
+            this.Lands = new ObservableCollection<PaisItemViewModel>(
+                this.ToPaisItemViewModel());
             this.IsRefreshing = false;
             
+        }
+
+
+        #endregion
+
+        #region Methods
+        private IEnumerable<PaisItemViewModel> ToPaisItemViewModel()
+        {
+            return MainViewModel.GetInstance().LandsList.Select(l => new PaisItemViewModel
+            {
+                Alpha2Code = l.Alpha2Code,
+                Alpha3Code = l.Alpha3Code,
+                AltSpellings = l.AltSpellings,
+                Area = l.Area,
+                Borders = l.Borders,
+                CallingCodes = l.CallingCodes,
+                Capital = l.Capital,
+                Cioc = l.Cioc,
+                Currencies = l.Currencies,
+                Demonym = l.Demonym,
+                Flag = l.Flag,
+                Gini = l.Gini,
+                Languages = l.Languages,
+                Latlng = l.Latlng,
+                Name = l.Name,
+                NativeName = l.NativeName,
+                NumericCode = l.NumericCode,
+                Population = l.Population,
+                Region = l.Region,
+                RegionalBlocs = l.RegionalBlocs,
+                Subregion = l.Subregion,
+                Timezones = l.Timezones,
+                TopLevelDomain = l.TopLevelDomain,
+                Translations = l.Translations,
+            });
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿namespace AppPaises.ViewModels
 {
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -7,6 +8,9 @@
     public class MainViewModel
     {
         #region ViewModels
+
+        public List<Land> LandsList { get; set; }
+
         public LoginViewModel Login
         {
             get;
