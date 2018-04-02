@@ -11,13 +11,13 @@
             <!--diferent Size in List View HasUnevenRows-->
             <!--IsPullToRefreshEnabled, back and update-->
             <!--Barra de Busqueda-->
-            <SearchBar
+            <!--<SearchBar
                 BackgroundColor="Silver"
                 HeightRequest="46"
                 Text="{Binding Filter, Mode=TwoWay}"
                 Placeholder="Search..."
                 SearchCommand="{Binding SearchCommand}">
-            </SearchBar>
+            </SearchBar>-->
             <ListView
                 BackgroundColor="Silver"
                 HasUnevenRows="True"
@@ -34,12 +34,12 @@
                                 HasShadow="True"
                                 Margin="5">
                                 <Frame.GestureRecognizers>
-                                    <!--Event tap recognizer-->
+                                 <!--Event tap recognizer-->
                                     <TapGestureRecognizer
                                         Command="{Binding SelectLandCommand}">
-                                        
                                     </TapGestureRecognizer>
-                                    <!--layout structure-->
+                                </Frame.GestureRecognizers>
+                                <!--layout structure-->
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition
@@ -52,7 +52,7 @@
                                             </ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout
-                                            Grid.Column="1"
+                                            Grid.Column="0"
                                             VerticalOptions="Center">
                                             <Label
                                                 FontAttributes="Bold"
@@ -68,12 +68,13 @@
                                             </Label>   
                                         </StackLayout>
                                         <Image
-                                            Grid.Column="2"
+                                            Grid.Column="1"
                                             HorizontalOptions="End"
-                                            Source="ic_chevron_right"></Image>
+                                            Source="ic_chevron_right">
+                                            
+                                        </Image>
                                     </Grid>
-                                </Frame.GestureRecognizers>
-                            </Frame>
+                             </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
