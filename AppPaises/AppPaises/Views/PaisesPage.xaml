@@ -11,13 +11,13 @@
             <!--diferent Size in List View HasUnevenRows-->
             <!--IsPullToRefreshEnabled, back and update-->
             <!--Barra de Busqueda-->
-            <!--<SearchBar
+            <SearchBar
                 BackgroundColor="Silver"
                 HeightRequest="46"
                 Text="{Binding Filter, Mode=TwoWay}"
                 Placeholder="Search..."
                 SearchCommand="{Binding SearchCommand}">
-            </SearchBar>-->
+            </SearchBar>
             <ListView
                 BackgroundColor="Silver"
                 HasUnevenRows="True"
@@ -29,6 +29,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <!--frame Control--> 
                             <Frame
                                 CornerRadius="20"
                                 HasShadow="True"
