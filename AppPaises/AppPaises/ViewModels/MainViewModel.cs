@@ -7,10 +7,12 @@
 
     public class MainViewModel
     {
-        #region ViewModels
 
+        #region Properties
         public List<Land> LandsList { get; set; }
+        #endregion
 
+        #region ViewModels
         public LoginViewModel Login
         {
             get;

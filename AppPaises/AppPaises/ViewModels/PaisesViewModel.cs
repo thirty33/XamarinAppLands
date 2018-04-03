@@ -24,7 +24,8 @@
         private string filter;
 
         //Lista de paises como atributo de clase
-        private List<Land> landsList;
+        //Se movio a la MainViewModel
+        //private List<Land> landsList;
         #endregion
 
         // ObservableCollection para usar en una ListView

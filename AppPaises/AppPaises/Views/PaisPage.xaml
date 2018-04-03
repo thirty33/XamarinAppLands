@@ -19,7 +19,8 @@
                     TextColor="Black">
                     
                 </Label>
-                <Grid>
+                <Grid
+                    Margin="5,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
