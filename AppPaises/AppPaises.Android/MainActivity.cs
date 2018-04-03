@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 
 namespace AppPaises.Droid
 {
@@ -20,6 +21,8 @@ namespace AppPaises.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            //iniciando constructor de transformador de svg
+            CachedImageRenderer.Init(true);
             LoadApplication(new App());
         }
     }
