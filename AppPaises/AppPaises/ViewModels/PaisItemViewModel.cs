@@ -24,7 +24,10 @@
         {
             //Instancio la propiedad del locator y paso el item (this)
             MainViewModel.GetInstance().Land = new PaisViewModel(this);
-            await Application.Current.MainPage.Navigation.PushAsync(new PaisPage());
+            //await Application.Current.MainPage.Navigation.PushAsync(new PaisPage());
+
+            //Cambio a TabbedPage
+            await Application.Current.MainPage.Navigation.PushAsync(new PaisTabbedPage());
         }
         #endregion
     }
