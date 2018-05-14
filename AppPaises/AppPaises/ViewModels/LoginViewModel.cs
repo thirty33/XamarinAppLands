@@ -3,10 +3,17 @@
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Views;
+    using Services;
     using Xamarin.Forms;
 
     public class LoginViewModel : BaseViewModel
     {
+
+        #region Services
+        private ApiService apiService;
+        #endregion
+
+
         #region Attributes
         private string email;
         private string password;
@@ -49,6 +56,7 @@
         #region Constructors
         public LoginViewModel()
         {
+            this.apiService = new ApiService();
             this.IsRemembered = true;
             this.IsEnabled = true;
 
@@ -94,19 +102,66 @@
             this.IsRunning = true;
             this.IsEnabled = false;
 
-            if (this.Email != "joel" || this.Password != "1234")
+            
+
+            //if (this.Email != "joel" || this.Password != "1234")
+            //{
+
+            //    this.IsRunning = false;
+            //this.IsEnabled = true;
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Error",
+            //    "Email o password incorrecto",
+            //    "aceptar");
+            //this.Password = string.Empty;
+            //return;
+
+            //}
+
+            
+            var connection = await this.apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
             {
-
                 this.IsRunning = false;
-            this.IsEnabled = true;
-            await Application.Current.MainPage.DisplayAlert(
-                "Error",
-                "Email o password incorrecto",
-                "aceptar");
-            this.Password = string.Empty;
-            return;
-
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connection.Message,
+                    "Accept");
+                return;
             }
+
+            var token = await this.apiService.GetToken(
+                "http://landsapi1.azurewebsites.net",
+                this.Email,
+                this.Password);
+
+            if (token == null)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Something was wrong, please try later",
+                    "Accept");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(token.AccessToken))
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    token.ErrorDescription,
+                    "Accept");
+                this.password = string.Empty;
+                return;
+            }
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Token = token;
 
             this.IsRunning = false;
             this.IsEnabled = true;
@@ -120,7 +175,7 @@
 
 
             // Aplicando Patron Singleton
-            var mainViewModel = MainViewModel.GetInstance().Lands = new PaisesViewModel();
+            mainViewModel.Lands = new PaisesViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new PaisesPage());
 
         }

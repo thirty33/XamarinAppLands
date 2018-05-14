@@ -5,6 +5,9 @@
 
     public class TokenResponse
     {
+        /// <summary>
+        /// Atributos de la respuesta del api, revisar en PostMan
+        /// </summary>
         #region Properties
         [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
