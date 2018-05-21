@@ -60,8 +60,8 @@
             this.IsRemembered = true;
             this.IsEnabled = true;
 
-            this.Email = "joel";
-            this.Password = "1234";
+            this.Email = "jzuluaga55@hotmail.com";
+            this.Password = "123456";
         }
         #endregion
 

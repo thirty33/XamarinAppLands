@@ -2,8 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppPaises.Views.PaisesPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Informacion">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ffimageloadingsvg:SvgImageSourceConverter 
+                x:Key="SvgImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Lands}"
@@ -52,8 +61,14 @@
                                                 
                                             </ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <StackLayout
+                                        <ffimageloading:CachedImage 
                                             Grid.Column="0"
+                                            HeightRequest="30"
+                                            Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
+                                            WidthRequest="60">
+                                        </ffimageloading:CachedImage>
+                                    <StackLayout
+                                            Grid.Column="1"
                                             VerticalOptions="Center">
                                             <Label
                                                 FontAttributes="Bold"
@@ -69,7 +84,7 @@
                                             </Label>   
                                         </StackLayout>
                                         <Image
-                                            Grid.Column="1"
+                                            Grid.Column="2"
                                             HorizontalOptions="End"
                                             Source="ic_chevron_right">
                                             

@@ -19,10 +19,9 @@ namespace AppPaises.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
             //iniciando constructor de transformador de svg
             CachedImageRenderer.Init(true);
-
-            global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
     }
